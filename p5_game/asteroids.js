@@ -5,17 +5,11 @@ var bullets;
 var asteroids;
 var ship;
 var shipImage, bulletImage, particleImage;
+var bullet;
 var MARGIN = 40;
 
-function centerCanvas() {
-  var x = (windowWidth - width) / 2;
-  var y = (windowHeight - height) / 2;
-  cnv.position(x, y);
-}
 function setup() {
-  cnv = createCanvas(windowWidth, windowHeight);
-  centerCanvas();
-  cnv.parent('sketch-holder');
+  createCanvas(800, 600);
 
   bulletImage = loadImage('assets/asteroids_bullet.png');
   shipImage = loadImage('assets/asteroids_ship0001.png');
@@ -46,13 +40,26 @@ function draw() {
   fill(255);
   textAlign(CENTER);
   text('Controls: Arrow Keys + X', width/2, 20);
+  
+  if(ship.position.x<-MARGIN) ship.position.x = width+MARGIN;
+  if(ship.position.x>width+MARGIN) ship.position.x = -MARGIN;
+  if(ship.position.y<-MARGIN) ship.position.y = height+MARGIN;
+  if(ship.position.y>height+MARGIN) ship.position.y = -MARGIN;
 
-  for(var i=0; i<allSprites.length; i++) {
-    var s = allSprites[i];
+  for(var i=0; i<asteroids.length; i++) {
+    var s = asteroids[i];
     if(s.position.x<-MARGIN) s.position.x = width+MARGIN;
     if(s.position.x>width+MARGIN) s.position.x = -MARGIN;
     if(s.position.y<-MARGIN) s.position.y = height+MARGIN;
     if(s.position.y>height+MARGIN) s.position.y = -MARGIN;
+  }
+  
+  for(var j=0; j<bullets.length; j++) {
+    var b = bullets[j];
+    if(b.position.x<-MARGIN) b.remove;
+    if(b.position.x>width+MARGIN) b.remove;
+    if(b.position.y<-MARGIN) b.remove;
+    if(b.position.y>height+MARGIN) b.remove;
   }
 
   asteroids.overlap(bullets, asteroidHit);
@@ -73,13 +80,13 @@ function draw() {
 
   if(keyWentDown('x'))
   {
-    var bullet = createSprite(ship.position.x, ship.position.y);
+    bullet = createSprite(ship.position.x, ship.position.y);
     bullet.addImage(bulletImage);
     bullet.setSpeed(10+ship.getSpeed(), ship.rotation);
-    bullet.life = 30;
+    //bullet.life = 30;
     bullets.add(bullet);
   }
-
+  
   drawSprites();
 
 }
