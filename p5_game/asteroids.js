@@ -65,7 +65,7 @@ function draw() {
     ship.rotation += 4;
   if(keyDown(UP_ARROW))
   {
-    ship.addSpeed(0.2, ship.rotation);
+    ship.addSpeed(100, ship.rotation);
     ship.changeAnimation('thrust');
   }
   else
