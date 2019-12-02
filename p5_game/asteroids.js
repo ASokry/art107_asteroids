@@ -1,5 +1,4 @@
-//asteroid clone (core mechanics only)
-//arrow keys to move + x to shoot
+var cnv;
 
 var bullets;
 var asteroids;
@@ -8,8 +7,16 @@ var shipImage, bulletImage, particleImage;
 var bullet;
 var MARGIN = 40;
 
+function centerCanvas() {
+  var x = (windowWidth - width) / 2;
+  var y = (windowHeight - height) / 2;
+  cnv.position(x, y);
+}
+
 function setup() {
-  createCanvas(800, 600);
+  cnv = createCanvas(windowWidth, windowHeight);
+  centerCanvas();
+  cnv.parent('sketch-holder');
 
   bulletImage = loadImage('assets/asteroids_bullet.png');
   shipImage = loadImage('assets/asteroids_ship0001.png');
