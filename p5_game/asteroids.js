@@ -17,9 +17,9 @@ function setup() {
   centerCanvas();
   cnv.parent('sketch-holder');
 
-  bulletImage = loadImage('/assets/asteroids_bullet.png');
-  shipImage = loadImage('/assets/asteroids_ship0001.png');
-  particleImage = loadImage('/assets/asteroids_particle.png');
+  bulletImage = loadImage('assets/asteroids_bullet.png');
+  shipImage = loadImage('assets/asteroids_ship0001.png');
+  particleImage = loadImage('assets/asteroids_particle.png');
 
   ship = createSprite(width/2, height/2);
   ship.maxSpeed = 6;
@@ -27,7 +27,7 @@ function setup() {
   ship.setCollider('circle', 0, 0, 20);
 
   ship.addImage('normal', shipImage);
-  ship.addAnimation('thrust', '/assets/asteroids_ship0002.png', '/assets/asteroids_ship0007.png');
+  ship.addAnimation('thrust', 'assets/asteroids_ship0002.png', 'assets/asteroids_ship0007.png');
 
   asteroids = new Group();
   bullets = new Group();
@@ -86,7 +86,7 @@ function draw() {
 
 function createAsteroid(type, x, y) {
   var a = createSprite(x, y);
-  var img = loadImage('/assets/asteroid'+floor(random(0, 3))+'.png');
+  var img = loadImage('assets/asteroid'+floor(random(0, 3))+'.png');
   a.addImage(img);
   a.setSpeed(2.5-(type/2), random(360));
   a.rotationSpeed = 0.5;
