@@ -123,9 +123,9 @@ function scene2() {
       if(s.position.y>height+MARGIN) s.position.y = -MARGIN;
     }
 
-    asteroids.overlap(bullets, asteroidHit);
+    asteroids.overlap(bullets, this.asteroidHit);
 
-    ship.bounce(asteroids, loseLife);
+    ship.bounce(asteroids, this.loseLife);
 
     if(keyDown(LEFT_ARROW))
       ship.rotation -= 4;
