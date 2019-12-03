@@ -7,6 +7,7 @@ var lives = 0;
 var shipImage, bulletImage, particleImage;
 var shipSpeed = 100;
 var slowDown = false;
+var nextScene = false;
 var MARGIN = 40;
 
 function scene1() {
@@ -164,9 +165,6 @@ function scene2() {
     if(asteroids.length <= 0){
         text("YOU WIN", width/2, (height/2)-txtSize);
         text("Press ENTER", width/2, (height/2)+txtSize);
-        ship.remove();
-        bullets.clear();
-        asteroids.clear();
         if(keyCode == ENTER){
           this.sceneManager.showScene(scene3);
         }
@@ -231,6 +229,9 @@ function scene3() {
   this.setup = function() {
     //setup for scene3
     console.log("setup for level 2");
+    ship.remove();
+    bullets.clear();
+    asteroids.clear();
 
     bulletImage = loadImage("assets/asteroids_bullet.png");
     shipImage = loadImage("assets/asteroids_ship0001.png");
@@ -323,9 +324,6 @@ function scene3() {
     if(asteroids.length <= 0){
         text("YOU WIN", width/2, (height/2)-txtSize);
         text("Press ENTER", width/2, (height/2)+txtSize);
-        ship.remove();
-        bullets.clear();
-        asteroids.clear();
         if(keyCode == ENTER){
           this.sceneManager.showScene(scene4);
         }
