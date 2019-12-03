@@ -164,6 +164,9 @@ function scene2() {
     if(asteroids.length <= 0){
         text("YOU WIN", width/2, (height/2)-txtSize);
         text("Press ENTER", width/2, (height/2)+txtSize);
+        ship.remove();
+        bullets.clear();
+        asteroids.clear();
         if(keyCode == ENTER){
           this.sceneManager.showScene(scene3);
         }
@@ -262,6 +265,7 @@ function scene3() {
     background(0);
 
     fill(255);
+    var txtSize = Math.sqrt(width);
     textSize(Math.sqrt(width));
     textAlign(CENTER);
     text("(Bullet Storm in Space)", width/2, 30);
@@ -319,6 +323,9 @@ function scene3() {
     if(asteroids.length <= 0){
         text("YOU WIN", width/2, (height/2)-txtSize);
         text("Press ENTER", width/2, (height/2)+txtSize);
+        ship.remove();
+        bullets.clear();
+        asteroids.clear();
         if(keyCode == ENTER){
           this.sceneManager.showScene(scene4);
         }
