@@ -100,7 +100,8 @@ function scene2() {
     background(0);
 
     fill(255);
-    textSize(Math.sqrt(width));
+    var txtSize = Math.sqrt(width);
+    textSize(txtSize);
     textAlign(CENTER);
     text("Controls: Arrow Keys + X", width/2, 30);
     //text(asteroids.length, width/2, height/2);
@@ -319,7 +320,7 @@ function scene3() {
         text("YOU WIN", width/2, (height/2)-txtSize);
         text("Press ENTER", width/2, (height/2)+txtSize);
         if(keyCode == ENTER){
-          this.sceneManager.showScene(scene3);
+          this.sceneManager.showScene(scene4);
         }
     }else{
         text("Crashes:" + lives, width/2, height/2);
