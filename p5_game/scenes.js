@@ -86,13 +86,14 @@ function scene2() {
       var ang = random(360);
       var px = width/2 + 1000 * cos(radians(ang));
       var py = height/2+ 1000 * sin(radians(ang));
-      this.createAsteroid(3, px, py);
+      createAsteroid(3, px, py);
     }
   }
 
   this.enter = function() {
     //entering scene2
     console.log("entering level 1");
+    lives = 0;
   }
 
   this.draw = function() {
@@ -123,9 +124,9 @@ function scene2() {
       if(s.position.y>height+MARGIN) s.position.y = -MARGIN;
     }
 
-    asteroids.overlap(bullets, this.asteroidHit);
+    asteroids.overlap(bullets, asteroidHit);
 
-    ship.bounce(asteroids, this.loseLife);
+    ship.bounce(asteroids, loseLife);
 
     if(keyDown(LEFT_ARROW))
       ship.rotation -= 4;
@@ -168,7 +169,7 @@ function scene2() {
     drawSprites();
   }
 
-  this.createAsteroid = function(type, x, y){
+  function createAsteroid(type, x, y){
     var a = createSprite(x, y);
     var img = loadImage('assets/asteroid'+floor(random(0, 3))+'.png');
     a.addImage(img);
@@ -188,12 +189,12 @@ function scene2() {
     return a;
   }
 
-  this.asteroidHit = function(asteroid, bullet){
+  function asteroidHit(asteroid, bullet){
     var newType = asteroid.type-1;
 
     if(newType>0) {
-      this.createAsteroid(newType, asteroid.position.x, asteroid.position.y);
-      this.createAsteroid(newType, asteroid.position.x, asteroid.position.y);
+      createAsteroid(newType, asteroid.position.x, asteroid.position.y);
+      createAsteroid(newType, asteroid.position.x, asteroid.position.y);
     }
 
     for(var i=0; i<10; i++) {
@@ -209,7 +210,7 @@ function scene2() {
       asteroid.remove();
   }
 
-  this.loseLife = function(){
+  function loseLife(){
     lives++;
 
     ship.position.x = width/2;
