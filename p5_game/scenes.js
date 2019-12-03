@@ -86,7 +86,7 @@ function scene2() {
       var ang = random(360);
       var px = width/2 + 1000 * cos(radians(ang));
       var py = height/2+ 1000 * sin(radians(ang));
-      createAsteroid(3, px, py);
+      this.createAsteroid(3, px, py);
     }
   }
 
@@ -192,8 +192,8 @@ function scene2() {
     var newType = asteroid.type-1;
 
     if(newType>0) {
-      createAsteroid(newType, asteroid.position.x, asteroid.position.y);
-      createAsteroid(newType, asteroid.position.x, asteroid.position.y);
+      this.createAsteroid(newType, asteroid.position.x, asteroid.position.y);
+      this.createAsteroid(newType, asteroid.position.x, asteroid.position.y);
     }
 
     for(var i=0; i<10; i++) {
