@@ -229,9 +229,6 @@ function scene3() {
   this.setup = function() {
     //setup for scene3
     console.log("setup for level 2");
-    ship.remove();
-    bullets.clear();
-    asteroids.clear();
 
     bulletImage = loadImage("assets/asteroids_bullet.png");
     shipImage = loadImage("assets/asteroids_ship0001.png");
