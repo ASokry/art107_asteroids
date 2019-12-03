@@ -263,7 +263,7 @@ function scene3() {
     fill(255);
     textSize(Math.sqrt(width));
     textAlign(CENTER);
-    text("Controls: Arrow Keys + X", width/2, 30);
+    text("(Bullet Storm in Space)", width/2, 30);
     //text(asteroids.length, width/2, height/2);
 
     if(shipSpeed < 0){
