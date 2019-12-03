@@ -67,17 +67,17 @@ function scene2() {
     //setup for scene2
     console.log("setup for level 1");
 
-    bulletImage = loadImage('assets/asteroids_bullet.png');
-    shipImage = loadImage('assets/asteroids_ship0001.png');
-    particleImage = loadImage('assets/asteroids_particle.png');
+    bulletImage = loadImage("assets/asteroids_bullet.png");
+    shipImage = loadImage("assets/asteroids_ship0001.png");
+    particleImage = loadImage("assets/asteroids_particle.png");
 
     ship = createSprite(width/2, height/2);
     ship.maxSpeed = 6;
     ship.friction = 0.98;
-    ship.setCollider('circle', 0, 0, 20);
+    ship.setCollider("circle", 0, 0, 20);
 
-    ship.addImage('normal', shipImage);
-    ship.addAnimation('thrust', 'assets/asteroids_ship0002.png', 'assets/asteroids_ship0007.png');
+    ship.addImage("normal", shipImage);
+    ship.addAnimation("thrust", "assets/asteroids_ship0002.png", "assets/asteroids_ship0007.png");
 
     asteroids = new Group();
     bullets = new Group();
@@ -102,7 +102,7 @@ function scene2() {
     fill(255);
     textSize(Math.sqrt(width));
     textAlign(CENTER);
-    text('Controls: Arrow Keys + X', width/2, 30);
+    text("Controls: Arrow Keys + X", width/2, 30);
     //text(asteroids.length, width/2, height/2);
 
     if(shipSpeed < 0){
@@ -137,10 +137,10 @@ function scene2() {
       slowDown = false;
       //shipSpeed = 100;
       ship.addSpeed(100, ship.rotation);
-      ship.changeAnimation('thrust');
+      ship.changeAnimation("thrust");
     }
     else
-      ship.changeAnimation('normal');
+      ship.changeAnimation("normal");
 
     if(keyWentUp(UP_ARROW)){
         slowDown = true;
@@ -171,7 +171,7 @@ function scene2() {
 
   function createAsteroid(type, x, y){
     var a = createSprite(x, y);
-    var img = loadImage('assets/asteroid'+floor(random(0, 3))+'.png');
+    var img = loadImage("assets/asteroid"+floor(random(0, 3))+".png");
     a.addImage(img);
     a.setSpeed(2.5-(type/2), random(360));
     a.rotationSpeed = 0.5;
@@ -184,7 +184,7 @@ function scene2() {
       a.scale = 0.3;
 
     a.mass = 2+a.scale;
-    a.setCollider('circle', 0, 0, 50);
+    a.setCollider("circle", 0, 0, 50);
     asteroids.add(a);
     return a;
   }
