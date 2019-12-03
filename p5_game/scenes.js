@@ -165,6 +165,7 @@ function scene2() {
     if(asteroids.length <= 0){
         text("YOU WIN", width/2, (height/2)-txtSize);
         text("Press ENTER", width/2, (height/2)+txtSize);
+        ship.remove();
         if(keyCode == ENTER){
           this.sceneManager.showScene(scene3);
         }
