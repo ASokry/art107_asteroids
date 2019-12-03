@@ -1,22 +1,15 @@
-var cnv;
 
 var bullets;
 var asteroids;
 var ship;
+var lives = 0;
 var shipImage, bulletImage, particleImage;
-var bullet;
+var shipSpeed = 100;
+var slowDown = false;
 var MARGIN = 40;
 
-function centerCanvas() {
-  var x = (windowWidth - width) / 2;
-  var y = (windowHeight - height) / 2;
-  cnv.position(x, y);
-}
-
 function setup() {
-  cnv = createCanvas(windowWidth, windowHeight);
-  centerCanvas();
-  cnv.parent('sketch-holder');
+  createCanvas(800,600);
 
   bulletImage = loadImage('assets/asteroids_bullet.png');
   shipImage = loadImage('assets/asteroids_ship0001.png');
@@ -45,11 +38,24 @@ function draw() {
   background(0);
 
   fill(255);
+  textSize(Math.sqrt(width));
   textAlign(CENTER);
-  text('Controls: Arrow Keys + X', width/2, 20);
-  
-  for(var i=0; i<allSprites.length; i++) {
-    var s = allSprites[i];
+  text('Controls: Arrow Keys + X', width/2, 30);
+  //text(asteroids.length, width/2, height/2);
+
+  if(shipSpeed < 0){
+      slowDown = false;
+      shipSpeed = 100;
+  }
+  //ship.addSpeed(shipSpeed, ship.rotation);
+
+    if(ship.position.x<-MARGIN) ship.position.x = width+MARGIN;
+    if(ship.position.x>width+MARGIN) ship.position.x = -MARGIN;
+    if(ship.position.y<-MARGIN) ship.position.y = height+MARGIN;
+    if(ship.position.y>height+MARGIN) ship.position.y = -MARGIN;
+
+  for(var i=0; i<asteroids.length; i++) {
+    var s = asteroids[i];
     if(s.position.x<-MARGIN) s.position.x = width+MARGIN;
     if(s.position.x>width+MARGIN) s.position.x = -MARGIN;
     if(s.position.y<-MARGIN) s.position.y = height+MARGIN;
@@ -58,7 +64,7 @@ function draw() {
 
   asteroids.overlap(bullets, asteroidHit);
 
-  ship.bounce(asteroids);
+  ship.bounce(asteroids, loseLife);
 
   if(keyDown(LEFT_ARROW))
     ship.rotation -= 4;
@@ -66,23 +72,39 @@ function draw() {
     ship.rotation += 4;
   if(keyDown(UP_ARROW))
   {
+    slowDown = false;
+    //shipSpeed = 100;
     ship.addSpeed(100, ship.rotation);
     ship.changeAnimation('thrust');
   }
   else
     ship.changeAnimation('normal');
 
+  if(keyWentUp(UP_ARROW)){
+      slowDown = true;
+  }
+
+  if(slowDown){
+      shipSpeed--;
+      ship.addSpeed(shipSpeed, ship.rotation);
+  }
+
   if(keyWentDown('x'))
   {
-    bullet = createSprite(ship.position.x, ship.position.y);
+    var bullet = createSprite(ship.position.x, ship.position.y);
     bullet.addImage(bulletImage);
     bullet.setSpeed(10+ship.getSpeed(), ship.rotation);
-    //bullet.life = 30;
+    bullet.life = 50;
     bullets.add(bullet);
   }
-  
-  drawSprites();
 
+  if(asteroids.length <= 0){
+      text("YOU WIN", width/2, height/2);
+  }else{
+      text("Crashes:" + lives, width/2, height/2);
+  }
+
+  drawSprites();
 }
 
 function createAsteroid(type, x, y) {
@@ -121,6 +143,14 @@ function asteroidHit(asteroid, bullet) {
     p.life = 15;
   }
 
-  bullet.remove();
-  asteroid.remove();
+    bullet.remove();
+    asteroids.remove(asteroid);
+    asteroid.remove();
+}
+
+function loseLife(){
+  lives++;
+
+  ship.position.x = width/2;
+  ship.position.y = height/2;
 }
