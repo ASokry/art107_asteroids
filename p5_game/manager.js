@@ -21,6 +21,7 @@ function setup(){
   mgr.addScene (scene2);
   mgr.addScene (scene3);
   mgr.addScene (scene4);
+  mgr.addScene (scene5);
   mgr.showNextScene();
 }
 
@@ -45,6 +46,9 @@ function keyPressed()
             break;
         case '4':
             mgr.showScene( scene4 );
+            break;
+        case '5':
+            mgr.showScene( scene5 );
             break;
     }
 
