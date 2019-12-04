@@ -427,10 +427,6 @@ function scene4() {
     text("To the Left or Right", width/2, 30);
     //text(asteroids.length, width/2, height/2);
 
-    if(shipSpeed < 0){
-        slowDown = false;
-        shipSpeed = 100;
-    }
     //ship.addSpeed(shipSpeed, ship.rotation);
 
       if(ship.position.x<-MARGIN) ship.position.x = width+MARGIN;
@@ -456,28 +452,17 @@ function scene4() {
       ship.rotation += 4;
     if(keyDown(UP_ARROW) || keyDown('w'))
     {
-      slowDown = false;
       //shipSpeed = 100;
       ship.addSpeed(100, 0);
       ship.changeAnimation("thrust");
     }
     else if(keyDown(DOWN_ARROW) || keyDown('s'))
     {
-      slowDown = false;
       ship.addSpeed(100, 180);
       ship.changeAnimation("thrust");
     }
     else{
       ship.changeAnimation("normal");
-    }
-
-    if(keyWentUp(UP_ARROW) || keyWentUp(DOWN_ARROW)){
-        slowDown = true;
-    }
-
-    if(slowDown){
-        shipSpeed--;
-        ship.addSpeed(shipSpeed, ship.rotation);
     }
 
     if(keyWentDown('x'))
