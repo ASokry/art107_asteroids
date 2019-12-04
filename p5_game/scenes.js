@@ -1,4 +1,3 @@
-var tab = 0;
 
 var bullets;
 var asteroids;
@@ -20,7 +19,6 @@ function scene1() {
   this.enter = function() {
     //entering scene1
     console.log("entering menu");
-    tab = 0;
     lives = 0;
   }
 
@@ -34,31 +32,17 @@ function scene1() {
     text("Asteroids", width/2, txtSize*2);
     textStyle(NORMAL);
     textSize(txtSize);
-    text("PLAY", width/2, (height/2)-txtSize);
-    text("EXIT", width/2, (height/2)+txtSize);
+    text("Press ENTER to Play", width/2, (height/2));
 
     noFill();
     strokeWeight(txtSize/10);
     stroke(255);
     rectMode(CENTER);
-    if(tab == 0){
-      rect(width/2, ((height/2)-txtSize)-txtSize/2.5, txtSize*3,txtSize);
-    }else if (tab == 1) {
-      rect(width/2, ((height/2)+txtSize)-txtSize/2.5, txtSize*3,txtSize);
-    }
   }
 
   this.keyPressed = function() {
-    if(key == 'w' || keyCode == UP_ARROW){
-      tab = 0;
-    }else if(key == 's' || keyCode == DOWN_ARROW){
-      tab = 1;
-    }
-
-    if(keyCode == ENTER && tab == 0){
+    if(keyCode == ENTER){
       this.sceneManager.showScene(scene2);
-    }else if (keyCode == ENTER && tab == 1) {
-      console.log("to arcade menu");
     }
   }
 }
