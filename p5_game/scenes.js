@@ -21,6 +21,7 @@ function scene1() {
     //entering scene1
     console.log("entering menu");
     tab = 0;
+    lives = 0;
   }
 
   this.draw = function() {
@@ -638,10 +639,10 @@ function scene5() {
 
     if(asteroids.length <= 0){
         text("YOU WIN", width/2, (height/2)-txtSize);
-        text("Press ENTER", width/2, (height/2)+txtSize);
+        text("Press ENTER to Exit", width/2, (height/2)+txtSize);
         ship.remove();
         if(keyCode == ENTER){
-          this.sceneManager.showScene(scene3);
+          this.sceneManager.showScene(scene1);
         }
     }else{
         text("Crashes:" + lives, width/2, height/2);
